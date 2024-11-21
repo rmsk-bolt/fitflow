@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+  }
+
+  body {
+    @apply text-white antialiased overflow-x-hidden min-h-screen relative;
+    max-width: 430px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, 
+      rgb(88, 28, 135) 0%,
+      rgb(67, 56, 202) 50%,
+      rgb(79, 70, 229) 100%
+    );
+    background-attachment: fixed;
+  }
+
+  input {
+    @apply bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white placeholder-white/50
+           focus:outline-none focus:ring-2 focus:ring-purple-400/50;
+  }
+
+  input.transparent {
+    @apply bg-transparent border-none focus:ring-0;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl 
+           shadow-[0_8px_32px_0_rgba(139,92,246,0.1)] transition-all duration-300;
+  }
+
+  .glass-button {
+    @apply backdrop-blur-sm bg-white/20 border border-white/20 
+           rounded-xl shadow-lg transition-all duration-300 text-white font-medium 
+           active:scale-95;
+  }
+
+  .create-workout-button {
+    @apply w-full py-4 px-6 text-lg font-semibold text-white
+           bg-gradient-to-r from-purple-500 to-violet-600
+           rounded-xl shadow-[0_8px_32px_0_rgba(139,92,246,0.5)]
+           border border-purple-400/30
+           transition-all duration-300
+           active:scale-95
+           disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:bg-gray-500 disabled:scale-100
+           disabled:shadow-none disabled:border-gray-600;
+  }
+
+  .nav-bar {
+    @apply fixed bottom-6 left-1/2 -translate-x-1/2 glass-card px-6 py-4 
+           flex items-center gap-8 w-[calc(100%-2rem)] max-w-[400px];
+  }
+
+  .nav-tab {
+    @apply flex flex-col items-center justify-center p-3 rounded-xl
+           transition-colors duration-200 text-white/60;
+  }
+
+  .nav-tab-active {
+    @apply text-purple-400 bg-purple-500/20;
+  }
+
+  .modal {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center 
+           justify-center z-50 p-4 w-full max-w-[430px] mx-auto
+           transition-opacity duration-300 ease-in-out;
+  }
+
+  .modal-content {
+    @apply glass-card w-full max-h-[90vh] overflow-hidden animate-slide-up;
+  }
+
+  .menu-item {
+    @apply w-full px-4 py-2 text-left flex items-center gap-2 hover:bg-white/10 transition-colors duration-200;
+  }
+
+  .menu-item-danger {
+    @apply text-red-400;
+  }
+
+  .workout-menu {
+    @apply relative;
+  }
+
+  .workout-menu .glass-card {
+    @apply absolute right-0 mt-2 w-48 py-1 z-10;
+  }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoom-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
